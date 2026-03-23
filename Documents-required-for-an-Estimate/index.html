@@ -14,6 +14,9 @@
         .download-btn { background-color: #004695; color: white; }
         .share-btn { background-color: #e9ecef; color: #333; }
         .btn:active { transform: scale(0.98); opacity: 0.9; }
+
+         /* 1번 문구 스타일 */
+        #kakao-notice { display: none; color: #e74c3c; font-size: 13px; line-height: 1.5; background: #fff5f5; padding: 10px; border-radius: 6px; }
     </style>
 </head>
 <body>
@@ -24,6 +27,17 @@
     <!-- 안내 이미지 -->
     <img id="infoImage" src="https://rawcdn.githack.com/theDaWon/DAWON/refs/heads/main/Documents-required-for-an-Estimate/%EA%B2%AC%EC%A0%81%EB%AC%B8%EC%9D%98%EC%8B%9C%ED%95%84%EC%9A%94%EC%84%9C%EB%A5%98.png" alt="견적 문의 서류 안내">
 
+    <!-- [1번 위치] 카톡 사용자 안내 문구 -->
+    <div id="kakao-notice">
+        ⚠️ <b>일부 어플에서는 다운로드가 제한됩니다.</b><br>
+        이미지를 <b>길게 눌러서 저장</b>하거나<br>
+        다른 브라우저로 열어주세요.
+    </div>
+
+
+
+
+    
     <div class="btn-group">
         <!-- 다운로드 버튼 -->
         <button onclick="downloadImage()" class="btn download-btn">이미지 저장</button>
