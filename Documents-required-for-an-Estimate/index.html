@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다원안전 - 견적 시 필요 서류 안내</title>
+    <style>
+        body { font-family: 'Pretendard', sans-serif; text-align: center; padding: 20px; background-color: #f8f9fa; color: #333; }
+        .container { max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h2 { font-size: 1.2rem; margin-bottom: 20px; color: #004695; }
+        img { width: 100%; height: auto; border-radius: 10px; border: 1px solid #eee; margin-bottom: 25px; }
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .btn { padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s; text-decoration: none; display: flex; align-items: center; justify-content: center; }
+        .download-btn { background-color: #004695; color: white; }
+        .share-btn { background-color: #e9ecef; color: #333; }
+        .btn:active { transform: scale(0.98); opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>📋 견적 문의 시 필요 서류 안내</h2>
+    
+    <!-- 안내 이미지 -->
+    <img id="infoImage" src="https://rawcdn.githack.com/theDaWon/DAWON/refs/heads/main/Documents-required-for-an-Estimate/%EA%B2%AC%EC%A0%81%EB%AC%B8%EC%9D%98%EC%8B%9C%ED%95%84%EC%9A%94%EC%84%9C%EB%A5%98.png" alt="견적 문의 서류 안내">
+
+    <div class="btn-group">
+        <!-- 다운로드 버튼 -->
+        <button onclick="downloadImage()" class="btn download-btn">이미지 저장</button>
+        <!-- 공유 버튼 -->
+        <button onclick="sharePage()" class="btn share-btn">링크 공유</button>
+    </div>
+</div>
+
+<script>
+    const imageUrl = "https://rawcdn.githack.com/theDaWon/DAWON/refs/heads/main/Documents-required-for-an-Estimate/%EA%B2%AC%EC%A0%81%EB%AC%B8%EC%9D%98%EC%8B%9C%ED%95%84%EC%9A%94%EC%84%9C%EB%A5%98.png";
+
+    // 1. 강제 다운로드 함수 (CORS 우회 방식)
+    async function downloadImage() {
+        try {
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = '다원안전_견적문의_필요서류.png';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('다운로드 실패:', error);
+            alert('이미지 저장에 실패했습니다. 이미지를 길게 눌러 직접 저장해주세요.');
+        }
+    }
+
+    // 2. 공유하기 함수 (Web Share API)
+    function sharePage() {
+        if (navigator.share) {
+            navigator.share({
+                title: '[다원안전] 견적 문의 필요 서류 안내',
+                text: '견적 문의 시 필요한 서류를 확인하세요.',
+                url: window.location.href
+            }).catch((error) => console.log('공유 취소', error));
+        } else {
+            // PC 등 미지원 브라우저 대응
+            const dummy = document.createElement("input");
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            alert("공유 링크가 복사되었습니다!");
+        }
+    }
+</script>
+
+</body>
+</html>
